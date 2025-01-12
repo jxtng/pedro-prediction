@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
