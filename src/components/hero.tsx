@@ -17,7 +17,7 @@ const HeroSection = () => {
             the thrill of football predictions, compete with others, and win big
             with every accurate guess.
           </p>
-          <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <div className="mt-6 flex flex-col gap-4 sm:flex-row max-md:justify-center">
             <Button className="bg-red-600 w-full sm:w-auto">Join Now</Button>
             <Button variant="outline" className="bg-transparent">
               How to play

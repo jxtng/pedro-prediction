@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white border-b-4 border-red-500">
-      <img src="/logo.svg" alt="Logo" />
+      <img src="/logo.svg" alt="Logo" className="max-sm:w-4/5" />
       <nav
         className={cn(
           "absolute top-20 left-0 w-full z-30 bg-gray-900 md:static md:flex md:w-auto md:bg-transparent duration-500",
@@ -53,7 +53,7 @@ const Header = () => {
           Log in
         </Button>
         <button
-          className="block text-white md:hidden"
+          className="block text-white md:hidden text-2xl"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           &#x2630;
