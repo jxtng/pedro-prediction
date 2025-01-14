@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <HeroSection />
-      <Tabs>
+      <Tabs defaultValue="soccer-prediction">
         <TabsList className="w-full bg-secondary rounded-none h-auto p-0 gap-1 overflow-auto">
           {navLinks.map((link) => (
             <TabsTrigger
