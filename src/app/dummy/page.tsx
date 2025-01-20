@@ -2,15 +2,12 @@ import React from "react";
 
 const page = async () => {
   try {
-    const response = await fetch(
-      `https://api.football-data.org/v4/competitions/FL1/matches?matchday=19`,
-      {
-        headers: {
-          "X-Auth-Token": process.env.FOOTBALL_DATA_ORG_API_KEY!,
-        },
-        next: { revalidate: 3600 },
-      }
-    );
+    const response = await fetch(`http://api.football-data.org/v4/teams/66`, {
+      headers: {
+        "X-Auth-Token": process.env.FOOTBALL_DATA_ORG_API_KEY!,
+      },
+      next: { revalidate: 3600 },
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
