@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { Clock, Calendar } from "lucide-react";
 import Image from "next/image";
 import { Head2HeadMatchData, MatchData, Score } from "./MatchPage";
+import Link from "next/link";
 
 interface MatchDetailsProps {
   matchData: MatchData | null;
@@ -80,8 +81,10 @@ const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
                   alt={matchData.homeTeam.name}
                   className="w-20 h-20 object-contain"
                 />
-                <h3 className="text-lg font-semibold text-center">
-                  {matchData.homeTeam.name}
+                <h3 className="text-lg font-semibold text-center hover:underline">
+                  <Link href={`/teams/${matchData.homeTeam.id}`}>
+                    {matchData.homeTeam.name}
+                  </Link>
                 </h3>
               </div>
 
@@ -109,8 +112,10 @@ const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
                   alt={matchData.awayTeam.name}
                   className="w-20 h-20 object-contain"
                 />
-                <h3 className="text-lg font-semibold text-center">
-                  {matchData.awayTeam.name}
+                <h3 className="text-lg font-semibold text-center hover:underline">
+                  <Link href={`/teams/${matchData.awayTeam.id}`}>
+                    {matchData.awayTeam.name}
+                  </Link>
                 </h3>
               </div>
             </div>
@@ -186,18 +191,20 @@ const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
                     <div className="text-sm">
                       {format(new Date(match.utcDate), "dd MMM yyyy")}
                     </div>
-                    <div className="flex items-center space-x-3">
-                      <span className="font-semibold">
-                        {match.homeTeam.shortName}
-                      </span>
-                      <span className="px-2 py-1 bg-primary/10 rounded">
-                        {match.score.fullTime.home} -{" "}
-                        {match.score.fullTime.away}
-                      </span>
-                      <span className="font-semibold">
-                        {match.awayTeam.shortName}
-                      </span>
-                    </div>
+                    <Link href={`/matches/${match.id}`}>
+                      <div className="flex items-center space-x-3">
+                        <span className="font-semibold">
+                          {match.homeTeam.shortName}
+                        </span>
+                        <span className="px-2 py-1 bg-primary/10 rounded">
+                          {match.score.fullTime.home} -{" "}
+                          {match.score.fullTime.away}
+                        </span>
+                        <span className="font-semibold">
+                          {match.awayTeam.shortName}
+                        </span>
+                      </div>
+                    </Link>
                   </div>
                 ))}
               </div>
