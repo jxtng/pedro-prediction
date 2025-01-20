@@ -6,6 +6,7 @@ import { Globe, MapPin, Calendar, Shield } from "lucide-react";
 import { TeamData } from "../page";
 import Image from "next/image";
 import { Player } from "@/types";
+import Link from "next/link";
 
 const TeamDetailsPage = ({ data }: { data: TeamData }) => {
   const groupPlayersByPosition = (players: Player[]) => {
@@ -135,7 +136,12 @@ const TeamDetailsPage = ({ data }: { data: TeamData }) => {
                           >
                             <div className="flex flex-col">
                               <span className="font-medium dark:text-white">
-                                {player.name}
+                                <Link
+                                  href={`/players/${player.id}`}
+                                  className="hover:underline cursor-pointer"
+                                >
+                                  {player.name}
+                                </Link>
                               </span>
                               <span className="text-sm text-muted-foreground dark:text-gray-300">
                                 {player.nationality} •{" "}
