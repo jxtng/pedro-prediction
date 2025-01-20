@@ -63,7 +63,7 @@ const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
     <div className="max-w-4xl mx-auto p-4 space-y-6">
       {/* Main Match Card */}
       {matchData && (
-        <Card className="bg-card dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 text-black dark:text-white">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">
               {matchData.competition.name} - Matchday {matchData.matchday}
@@ -120,7 +120,7 @@ const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
 
       {/* Head to Head Stats */}
       {head2HeadData && matchData && (
-        <Card className="bg-card dark:bg-gray-800">
+        <Card className="bg-white dark:bg-gray-800 text-black dark:text-white">
           <CardHeader>
             <CardTitle className="text-xl">Head to Head Statistics</CardTitle>
           </CardHeader>
