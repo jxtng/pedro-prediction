@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const navLinks = [
   {
@@ -28,7 +29,16 @@ const Header = () => {
 
   return (
     <header className="flex items-center justify-between px-6 py-4 bg-gray-900 text-white border-b-4 border-red-500">
-      <img src="/logo.svg" alt="Logo" className="max-sm:w-4/5" />
+      <Link href={"/"}>
+        <Image
+          height={80}
+          width={250}
+          priority
+          src="/logo.svg"
+          alt="Logo"
+          className="max-sm:w-4/5"
+        />
+      </Link>
       <nav
         className={cn(
           "absolute top-20 left-0 w-full z-30 bg-gray-900 md:static md:flex md:w-auto md:bg-transparent duration-500",
@@ -37,15 +47,17 @@ const Header = () => {
             : "animate-out slide-out-to-top-1 fade-out pointer-events-none max-md:fill-mode-forwards"
         )}
       >
-        <ul className="flex flex-col gap-4 px-6 md:flex-row md:gap-6 md:px-0 text-center">
+        <div className="flex flex-col gap-4 px-6 md:flex-row md:gap-6 md:px-0 text-center">
           {navLinks.map((link) => (
-            <li key={link.name}>
-              <Link href={link.href} className="hover:underline">
-                {link.name}
-              </Link>
-            </li>
+            <Link
+              key={link.name}
+              href={link.href}
+              className="hover:underline cursor-pointer"
+            >
+              <div>{link.name}</div>
+            </Link>
           ))}
-        </ul>
+        </div>
       </nav>
       <div className="flex items-center gap-4 md:gap-6">
         <Button className="hidden md:block">Register</Button>
