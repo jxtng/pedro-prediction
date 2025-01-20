@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { leagueId: string } }
+  { params }: { params: Promise<{ leagueId: string }> }
 ) {
-  const { leagueId } = params;
+  const { leagueId } = await params;
 
   try {
     const response = await fetch(
