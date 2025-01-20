@@ -1,11 +1,11 @@
 import HeroSection from "@/components/hero";
-import SoccerPrediction from "@/components/home/soccer-prediction";
+import UpcomingMatches from "@/components/home/upcoming-matches";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import React from "react";
 
 const navLinks = [
-  { name: "Soccer prediction", component: <SoccerPrediction /> },
+  { name: "Upcoming Matches", component: <UpcomingMatches /> },
   { name: "Statistics", component: "" },
   { name: "Livescore", component: "" },
   { name: "Rewards", component: "" },
@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <HeroSection />
-      <Tabs defaultValue="soccer-prediction">
+      <Tabs defaultValue="upcoming-matches">
         <TabsList className="w-full bg-secondary rounded-none h-auto p-0 gap-1 overflow-auto">
           {navLinks.map((link) => (
             <TabsTrigger

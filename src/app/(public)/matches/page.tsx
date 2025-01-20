@@ -1,7 +1,7 @@
 "use client";
 
 import { useMatches } from "@/hooks/useMatches";
-import { MatchSchedule } from "./components/MatchCard";
+import { MatchSchedule } from "@/app/(public)/matches/components/MatchCard";
 import { LEAGUES } from "@/utils/leagues";
 import { ClipLoader } from "react-spinners";
 
