@@ -3,7 +3,7 @@ import React from "react";
 const page = async () => {
   try {
     const response = await fetch(
-      `https://api.football-data.org/v4/matches/497620`,
+      `https://api.football-data.org/v4/competitions/FL1/matches?matchday=19`,
       {
         headers: {
           "X-Auth-Token": process.env.FOOTBALL_DATA_ORG_API_KEY!,
