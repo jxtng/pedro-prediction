@@ -2,7 +2,7 @@ import React from "react";
 
 const page = async () => {
   try {
-    const response = await fetch(`http://api.football-data.org/v4/teams/66`, {
+    const response = await fetch(`http://api.football-data.org/v4/persons/44`, {
       headers: {
         "X-Auth-Token": process.env.FOOTBALL_DATA_ORG_API_KEY!,
       },
