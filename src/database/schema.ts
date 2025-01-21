@@ -80,7 +80,6 @@ export const commentsRelations = relations(comments, ({ one, many }) => ({
 export const commentLikes = pgTable(
   "comment_likes",
   {
-    id: uuid("id").defaultRandom().primaryKey(),
     commentId: uuid("comment_id")
       .notNull()
       .references(() => comments.id, { onDelete: "cascade" }),
@@ -89,11 +88,11 @@ export const commentLikes = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
     createdAt: timestamp("created_at").defaultNow().notNull(),
   },
-  (table) => [
-    primaryKey({ columns: [table.commentId, table.userId] }),
-    index("comment_likes_comment_id_idx").on(table.commentId),
-    index("comment_likes_user_id_idx").on(table.userId),
-  ]
+  (table) => ({
+    pk: primaryKey({ columns: [table.commentId, table.userId] }),
+    commentIdIdx: index("comment_likes_comment_id_idx").on(table.commentId),
+    userIdIdx: index("comment_likes_user_id_idx").on(table.userId),
+  })
 );
 
 export const commentLikesRelations = relations(commentLikes, ({ one }) => ({
