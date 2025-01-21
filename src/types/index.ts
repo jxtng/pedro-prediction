@@ -1,3 +1,13 @@
+import type { User } from "next-auth";
+import type { NewPasswordSchema } from "@/schemas";
+import type z from "zod";
+
+export interface ExtendedSessionUser extends User {
+  role: string;
+}
+
+export type NewPasswordValues = z.infer<typeof NewPasswordSchema>;
+
 export interface Area {
   id: number;
   name: string;

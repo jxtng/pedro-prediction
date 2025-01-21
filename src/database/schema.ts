@@ -106,3 +106,35 @@ export const commentLikesRelations = relations(commentLikes, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export const verificationTokens = pgTable(
+  "verificationToken",
+  {
+    identifier: text("identifier").notNull(),
+    token: text("token").notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
+  },
+  (verificationToken) => [
+    {
+      compositePk: primaryKey({
+        columns: [verificationToken.identifier, verificationToken.token],
+      }),
+    },
+  ]
+);
+
+export const passwordReseTokens = pgTable(
+  "passwordReseToken",
+  {
+    identifier: text("identifier").notNull(),
+    token: text("token").notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
+  },
+  (passwordReseToken) => [
+    {
+      compositePk: primaryKey({
+        columns: [passwordReseToken.identifier, passwordReseToken.token],
+      }),
+    },
+  ]
+);
