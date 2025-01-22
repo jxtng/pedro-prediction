@@ -14,7 +14,7 @@ interface MatchDetailsProps {
 }
 
 const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
-  console.log("head2HeadData", head2HeadData);
+  // console.log("head2HeadData", head2HeadData);
   const getScoreDisplay = (score: Score) => {
     if (!score?.fullTime?.home && !score?.fullTime?.away) {
       return "vs";

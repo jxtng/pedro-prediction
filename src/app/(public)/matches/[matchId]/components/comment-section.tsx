@@ -225,6 +225,7 @@ const CommentCard = ({
 
 const CommentSection = ({ matchId }: { matchId?: number }) => {
   const [comments, setComments] = useState<Comment[]>([]);
+  const [commentError, setCommentError] = useState("");
   const [newComment, setNewComment] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [commenting, setCommenting] = useState(false);
@@ -268,6 +269,7 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
     e.preventDefault();
     if (!newComment.trim()) return;
     if (commenting) return;
+    setCommentError("");
     if (!user?.id) {
       return router.push(`/auth/sign-in?redirect=${pathname}`);
     }
@@ -290,9 +292,14 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
         setComments((prev) => [data, ...prev]);
         setNewComment("");
       }
+
+      if (!response.ok) {
+        const message = await response.json();
+        setCommentError(message.details[0].message);
+      }
     } catch (error) {
       setError("Failed to post comment");
-      console.error("Failed to post comment:", error);
+      console.log("Failed to post comment:", error);
     } finally {
       setCommenting(false);
     }
@@ -397,6 +404,9 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
                   Login to Comment
                 </Button>
               )}
+            </div>
+            <div className="text-red-500 text-center font-semibold">
+              {commentError}
             </div>
           </form>
         </CardContent>

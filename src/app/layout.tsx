@@ -5,7 +5,7 @@ import Header from "@/components/header";
 import NextTopLoader from "nextjs-toploader";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
-
+import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
@@ -28,6 +28,7 @@ export default async function RootLayout({
           <NextTopLoader zIndex={9999} />
           <Header />
           {children}
+          <Toaster position="bottom-left" />
         </body>
       </html>
     </SessionProvider>
