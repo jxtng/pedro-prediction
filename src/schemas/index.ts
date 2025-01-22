@@ -58,4 +58,5 @@ export const CommentSchema = z.object({
     }),
   matchId: z.number(),
   authorId: z.string(),
+  parentId: z.string().optional(),
 });
