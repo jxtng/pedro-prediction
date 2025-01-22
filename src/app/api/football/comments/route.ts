@@ -54,7 +54,7 @@ export async function GET(request: Request) {
         users.email,
         users.role
       );
-    logger.log({ level: "info", message: matchComments });
+    logger.log({ level: "info", message: matchComments[0].author.role });
     return NextResponse.json(matchComments);
   } catch (error) {
     logger.log({ level: "error", message: error });

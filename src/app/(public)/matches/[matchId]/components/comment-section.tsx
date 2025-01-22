@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { HeartIcon, MessageSquare, Send } from "lucide-react";
+import { HeartIcon, MessageSquare, Send, Trash2 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { usePathname, useRouter } from "next/navigation";
@@ -31,13 +31,13 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
   const [newComment, setNewComment] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [commenting, setCommenting] = useState(false);
-  // TODO use error
+  const [deleting, setDeleting] = useState<string | null>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState("");
   const user = useCurrentUser();
   const router = useRouter();
   const pathname = usePathname();
-  console.log("pathname", pathname);
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -92,7 +92,6 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("data", data);
         setComments((prev) => [data, ...prev]);
         setNewComment("");
       }
@@ -101,6 +100,32 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
       console.error("Failed to post comment:", error);
     } finally {
       setCommenting(false);
+    }
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    if (!user?.id || deleting) return;
+    try {
+      setDeleting(commentId);
+      const response = await fetch(`/api/football/comments/${commentId}`, {
+        method: "DELETE",
+        body: JSON.stringify({
+          authorId: user?.id,
+        }),
+      });
+
+      if (response.ok) {
+        setComments((prev) =>
+          prev.filter((comment) => comment.id !== commentId)
+        );
+      } else {
+        setError("Failed to delete comment");
+      }
+    } catch (error) {
+      setError("Failed to delete comment");
+      console.error("Failed to delete comment:", error);
+    } finally {
+      setDeleting(null);
     }
   };
 
@@ -177,11 +202,24 @@ const CommentSection = ({ matchId }: { matchId?: number }) => {
                           })}
                         </p>
                       </div>
-                      {comment.author.role === "admin" && (
-                        <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">
-                          Admin
-                        </span>
-                      )}
+                      <div className="flex items-center gap-2">
+                        {comment.author.role === "admin" && (
+                          <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full">
+                            Admin
+                          </span>
+                        )}
+                        {user?.id === comment.author.id && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            onClick={() => handleDeleteComment(comment.id)}
+                            disabled={deleting === comment.id}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        )}
+                      </div>
                     </div>
                     <p className="mt-2">{comment.content}</p>
                     <div className="flex gap-4 mt-4">
