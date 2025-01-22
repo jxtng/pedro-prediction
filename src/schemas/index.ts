@@ -46,3 +46,16 @@ export const RegisterSchema = z
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
+
+export const CommentSchema = z.object({
+  content: z
+    .string()
+    .min(1, {
+      message: "Comment is required",
+    })
+    .max(200, {
+      message: "Comment must be less than 200 characters",
+    }),
+  matchId: z.number(),
+  authorId: z.string(),
+});

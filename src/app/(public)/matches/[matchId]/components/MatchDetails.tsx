@@ -6,6 +6,7 @@ import { Clock, Calendar } from "lucide-react";
 import Image from "next/image";
 import { Head2HeadMatchData, MatchData, Score } from "./MatchPage";
 import Link from "next/link";
+import CommentSection from "./comment-section";
 
 interface MatchDetailsProps {
   matchData: MatchData | null;
@@ -212,6 +213,18 @@ const MatchDetails = ({ matchData, head2HeadData }: MatchDetailsProps) => {
           </CardContent>
         </Card>
       )}
+
+      {/* Comment section */}
+      <Card className="bg-white dark:bg-gray-800 text-black dark:text-white">
+        <CardHeader>
+          <CardTitle className="text-xl">
+            User Discussions and Predictions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CommentSection matchId={matchData?.id} />
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -27,7 +27,7 @@ export async function GET(request: Request) {
     }
 
     const data = await response.json();
-    console.log("h2h-data", data);
+    // console.log("h2h-data", data);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching match:", error);

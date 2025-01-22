@@ -6,6 +6,7 @@ import {
   timestamp,
   primaryKey,
   index,
+  integer,
   type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -22,26 +23,8 @@ export const users = pgTable("users", {
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
-  posts: many(posts),
   comments: many(comments),
   commentLikes: many(commentLikes),
-}));
-
-export const posts = pgTable("posts", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  content: text("content").notNull(),
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  authorId: uuid("author_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "cascade" }),
-});
-
-export const postsRelations = relations(posts, ({ one, many }) => ({
-  author: one(users, {
-    fields: [posts.authorId],
-    references: [users.id],
-  }),
-  comments: many(comments),
 }));
 
 export const comments = pgTable("comments", {
@@ -52,7 +35,7 @@ export const comments = pgTable("comments", {
   authorId: uuid("author_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  postId: uuid("post_id").references(() => posts.id, { onDelete: "cascade" }),
+  matchId: integer("match_id").notNull(),
   parentId: uuid("parent_id").references((): AnyPgColumn => comments.id, {
     onDelete: "cascade",
   }),
@@ -62,10 +45,6 @@ export const commentsRelations = relations(comments, ({ one, many }) => ({
   author: one(users, {
     fields: [comments.authorId],
     references: [users.id],
-  }),
-  post: one(posts, {
-    fields: [comments.postId],
-    references: [posts.id],
   }),
   parent: one(comments, {
     fields: [comments.parentId],

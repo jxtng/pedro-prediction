@@ -17,7 +17,7 @@ export async function GET() {
     }
 
     const data = await response.json();
-    console.log("data", data);
+    // console.log("data", data);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error fetching matches:", error);

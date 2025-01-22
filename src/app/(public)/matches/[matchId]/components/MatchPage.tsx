@@ -111,7 +111,7 @@ const MatchPage = ({ matchId }: { matchId: string }) => {
         }
 
         const data = await response.json();
-        console.log("h2h-data", data);
+        // console.log("h2h-data", data);
         setHead2HeadData(data);
       } catch (error) {
         console.error("Error fetching match:", error);
