@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import PredictionTables from "./prediction-tables";
 
 const UpcomingMatches = () => {
   const { states, error } = useMatches(LEAGUES);
@@ -60,43 +61,7 @@ const UpcomingMatches = () => {
           </div>
         ))}
       </div>
-      <aside className="lg:w-80 w-full p-4 border-l-4 border-red-500">
-        <div className="top-leagues mb-6">
-          <h3 className="text-lg font-bold text-center mb-4 dark:text-white text-black">
-            Top Leagues Predictors
-          </h3>
-          <ul className="space-y-2">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <li
-                key={index}
-                className="flex justify-between items-center bg-white text-black dark:text-white dark:bg-gray-950 p-2 rounded-md"
-              >
-                <span className="text-sm">Predictor {index + 1}</span>
-                <span className="bg-green-500 text-xs px-2 py-1 rounded-md">
-                  90%
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="overall-section">
-          <h3 className="text-lg font-bold text-center mb-4 dark:text-white text-black">
-            Overall Table
-          </h3>
-          <ul className="space-y-1">
-            {Array.from({ length: 15 }).map((_, index) => (
-              <li
-                key={index}
-                className="flex justify-between text-sm bg-white text-black dark:text-white dark:bg-gray-950 p-2 rounded-md"
-              >
-                <span>Team {index + 1}</span>
-                <span className="text-green-500">+{index * 10} pts</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
+      <PredictionTables />
     </section>
   );
 };

@@ -1,4 +1,5 @@
 import HeroSection from "@/components/hero";
+import LiveScore from "@/components/home/livescore";
 import UpcomingMatches from "@/components/home/upcoming-matches";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
@@ -7,7 +8,7 @@ import React from "react";
 const navLinks = [
   { name: "Upcoming Matches", component: <UpcomingMatches /> },
   { name: "Statistics", component: "" },
-  { name: "Livescore", component: "" },
+  { name: "Livescore", component: <LiveScore /> },
   { name: "Rewards", component: "" },
 ];
 const Home = () => {
